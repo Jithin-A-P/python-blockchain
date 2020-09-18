@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, jsonify, request
 from uuid import uuid4
 from blockchain import Blockchain
 import json
@@ -10,11 +10,20 @@ blockchain = Blockchain()
 
 @app.route('/mine', methods = ['GET'])
 def mine():
-    return 'Mining'
+    pass
 
 @app.route('/transactions/new', methods=['POST'])
 def new_transaction():
-    return "Trasaction"
+    values = request.get_json()
+
+    required = ['sender', 'recipient', 'amount']
+    if not all(k in values for k in required):
+        return 'Missing values', 400
+
+    index = blockchain.new_transaction(values['sender'], values['recipient'], values['amount'])
+
+    response = {'message': f'Transaction will be adde to block { index }'}
+    return jsonify(response), 201
 
 @app.route('/chain', methods=['GET'])
 def full_chain():
