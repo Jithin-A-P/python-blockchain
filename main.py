@@ -1,9 +1,6 @@
 from flask import Flask, jsonify, request
 from uuid import uuid4
-
-from flask.wrappers import Response
 from blockchain import Blockchain
-import json
 
 app = Flask(__name__)
 node_identifier = str(uuid4()).replace('-', '')
