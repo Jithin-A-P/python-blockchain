@@ -17,7 +17,10 @@ class Blockchain(object):
             'proof': proof,
             'previous_hash': previous_hash or self.hash(self.chain[-1])
         }
+
         self.current_transactioins = []
+        self.chain.append(block)
+        
         return block
     
     def new_transaction(self, sender, recipient, amount):

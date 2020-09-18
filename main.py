@@ -42,7 +42,7 @@ def new_transaction():
 
     index = blockchain.new_transaction(values['sender'], values['recipient'], values['amount'])
 
-    response = {'message': f'Transaction will be adde to block { index }'}
+    response = {'message': f'Transaction will be added to block { index }'}
     return jsonify(response), 201
 
 @app.route('/chain', methods=['GET'])
